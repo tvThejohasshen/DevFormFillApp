@@ -54,7 +54,7 @@
                             <arguments>
                                 <argument>-c</argument>
                                 <argument>
-                                    scp target/maven-project.war 
+                                    scp target/maven-project.war user@docker-host:/opt/docker
                                 </argument>
                             </arguments>
                         </configuration>
@@ -70,7 +70,7 @@
                             <arguments>
                                 <argument>-c</argument>
                                 <argument>
-                                    scp target/maven-project.war 
+                                    scp target/maven-project.war ansible-user@ansible-host:/opt/docker
                                 </argument>
                             </arguments>
                         </configuration>
