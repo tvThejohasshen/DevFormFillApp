@@ -21,7 +21,9 @@
         <plugins>
             <!-- Compile Java Code -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>  <!-- Added missing version -->
                 <configuration>
                     <source>21</source>
                     <target>21</target>
@@ -38,13 +40,14 @@
                 </configuration>
             </plugin>
 
-            <!-- Maven Exec Plugin for Transfer -->
+            <!-- Maven Exec Plugin for Deployment -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.0.0</version>
                 <executions>
                     <execution>
+                        <id>install-exec</id>  <!-- Unique ID -->
                         <phase>install</phase>
                         <goals>
                             <goal>exec</goal>
@@ -54,30 +57,12 @@
                             <arguments>
                                 <argument>-c</argument>
                                 <argument>
-                                    scp target/maven-project.war user@docker-host:/opt/docker
+                                    scp target/maven-project.war user@server:/path/to/deploy/
                                 </argument>
                             </arguments>
                         </configuration>
                     </execution>
 
                     <execution>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>sh</executable>
-                            <arguments>
-                                <argument>-c</argument>
-                                <argument>
-                                    scp target/maven-project.war ansible-user@ansible-host:/opt/docker
-                                </argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
-</project>
+                        <id>deploy-exec</id>  <!-- Unique ID -->
+                        <phase>
